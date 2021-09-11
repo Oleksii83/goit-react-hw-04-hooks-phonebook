@@ -3,13 +3,12 @@ import shortid from 'shortid';
 import './ContactForm.css';
 
 export default function ContactForm({ onSubmit }) {
-  const [contacts, setContacs] = useState([]);
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
 
   const handleChange = e => {
     const { name, value } = e.currentTarget;
-    console.log(name);
+
     switch (name) {
       case 'name':
         setName(value);
@@ -25,7 +24,13 @@ export default function ContactForm({ onSubmit }) {
   const handleSubmit = e => {
     e.preventDefault();
 
-    console.log('🚀 ~ file: ContactForm.js ~ line 18 ~ ContactForm ~ handleSubmit', handleSubmit);
+    onSubmit({ name, number });
+    reset();
+  };
+
+  const reset = () => {
+    setName('');
+    setNumber('');
   };
 
   const nameInputId = shortid.generate();
